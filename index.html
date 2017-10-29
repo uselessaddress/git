@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Sacc_Class</title>
+
+		<meta name="description" content="Sacc_Class">
+		<meta name="author" content="PrConstantin">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/reveal_me.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section >
+					<h1>Git</h1>
+				</section>
+				<section>
+					<section>
+						<h3>先来看张图</h3>
+						<img src="./lib/img/github.jpg" alt="" class="github">
+					</section>
+					<section>
+						<h1 >Git是什么？</h1>
+						<h3 class="fragment fade-up">Git是便捷，高效的代码版本管理工具</h3>
+					</section>
+					<section>
+						<h2>使用场景</h2>
+						<ul>
+							<li>当你在频繁的代码改动后，
+								发现新的代码有问题，
+								需要改回之前的代码，
+								你会怎么做？
+							</li>
+						</ul>
+					</section>
+					<section>
+						<h2>安装Git</h2>
+						linux:
+						<pre><code class="linux" data-trim style="font-size: 18px;">
+								$ sudo apt-get install git
+						</code></pre>
+						windows:
+						<a href="https://git-for-windows.github.io/">下载git-for-windows</a><br/>
+						<pre><code class="linux" data-trim style="font-size: 18px;">
+								$ git config --global user.name "Your Name"
+								$ git config --global user.email "email@example.com"
+						</code></pre>
+					</section>
+				
+					<section>
+							<h2>创建版本库</h2>
+							<ul>
+									<li>版本库又名仓库(repository)，简单理解成一个目录，这个目录里面的所有文件都被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都可以追踪历史，或者在将来某个时刻可以“还原”。
+
+									</li>
+									
+							</ul>
+							<pre><code class="linux" data-trim style="font-size: 18px;">
+									$ git init //初始化版本库
+							</code></pre>
+					</section>
+					<section>
+							<h2>修改文件，查看文件状态变化</h2>
+							<ul>
+									<li>
+										git status命令可以时刻掌握仓库当前的状态
+									</li>
+									<li>
+										如果记不清上次怎么修改的文件，使用git diff这个命令看看
+									</li>
+									
+							</ul>
+							<pre><code class="linux" data-trim style="font-size: 18px;">
+									$ git status //查看当前版本库状态
+									$ git diff   //查看difference
+							</code></pre>
+					</section>
+					<section>
+							<h2>如何提交修改，以及暂存区概念</h2>
+							<ul>
+									<li>
+										工作区（Working Directory），就是你在电脑里能看到的目录
+									</li>
+									<li>
+										工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
+										版本库里有暂存区（stage），Git为我们自动创建的第一个分支master，
+										以及指向master的一个指针叫HEAD。
+									</li>
+	
+							</ul>
+					</section>
+					<section>
+							<h2>分两步执行</h2>
+							<ul>
+									<li>
+											第一步是用git add把文件添加进去，实际上就是把文件修改添加到暂存区
+									</li>
+									<li>
+											第二步是用git commit提交更改，实际上就是把暂存区的所有内容提交到当前分支。
+									</li>
+									
+							</ul>
+							<pre><code class="linux" data-trim style="font-size: 18px;">
+									$ git add 		        //添加文件至暂存区
+									$ git commit   			//提交修改，把暂存区的所有内容提交到当前分支
+									$ git checkout -- file  //丢弃工作区的修改
+								</code></pre>
+					</section>
+					<section>
+							<h2>把文件往Git版本库里添加</h2>
+							<img src="lib/img/0.jpg" class="stage">
+					</section>
+					<section>
+							<h2>版本回退</h2>
+							<ul>
+									<li>
+										例如你在打重要BOSS前总会存档，Git也是一样，每当你觉得文件修改到一定程度的时候，就可以“保存一个快照”
+										
+									</li>
+									<li>
+										这个快照在Git中被称为commit，一旦你把文件改乱了，或者误删了文件，还可以从最近的一个commit恢复，然后继续工作。
+									</li>
+									
+							</ul>
+							<pre><code class="linux" data-trim style="font-size: 18px;">
+									$ git log	//查看历史提交记录
+							</code></pre>
+					</section>
+					<section>
+						<h2>实现回退</h2>
+						<ul>
+								<li>
+									使用git log获取的信息里有每次提交的commit id
+								</li>
+								<li>
+									使用 git reset --hard "commit_id" 进行回退
+								</li>
+								<li>Git在内部有个指向当前版本的HEAD指针，当你回退版本的时候，Git仅仅是把HEAD从指向版本移至新版本</li>
+						</ul>
+						<pre><code class="linux" data-trim style="font-size: 18px;">
+								$ git reset --hard "commit_id" //实现回退
+						</code></pre>
+					</section>
+					<section>
+							<h2>分支管理</h2>
+							
+							分支使用的场景：
+							假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了50%的代码，如果立刻提交，由于代码还没写完，不完整的代码库会导致别人不能干活了。如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险
+
+					</section>
+					<section>
+							使用分支，你创建了一个属于你自己的分支，别人看不到，还继续在原来的分支上正常工作，而你在自己的分支上干活，想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，这样，既安全，又不影响别人工作。
+					</section>
+					<section>
+							<h2>分支创建</h2>
+							<ul>
+								<li>创建dev分支，然后切换到dev分支</li>
+								<li>git checkout命令加上-b参数表示创建并切换，</li>
+							</ul>
+							<pre><code class="linux" data-trim style="font-size: 18px;">
+									$ git checkout -b dev
+									Switched to a new branch 'dev'
+							</code></pre>	
+					</section>
+					<section>
+							<h2>查看当前分支</h2>
+							<ul>
+								<li>git branch命令会列出所有分支，当前分支前面会标一个*号。</li>
+								
+							</ul>
+							<pre><code class="linux" data-trim style="font-size: 18px;">
+									$ git branch
+									* dev
+									  master
+							</code></pre>	
+					</section>
+					<section>
+						<h2>合并分支</h2>
+						<ul>
+							<li>
+								git merge命令用于合并指定分支到当前分支。合并后，再查看master的内容，就可以看到，和dev分支的最新提交是完全一样的。
+							</li>
+							<li>git checkout -d "branch_name" 用于删除分支</li>
+						</ul>
+						<pre><code class="linux" data-trim style="font-size: 18px;">
+								$ git merge dev   //合并分支
+								Updating d17efd8..fec145a
+								Fast-forward
+								 readme.txt |    1 +
+								 1 file changed, 1 insertion(+)
+						</code></pre>	
+					</section>
+					<section>
+						<h2>远程仓库</h2>
+						<ul>
+							<li>Git是分布式版本控制系统，同一个Git仓库，可以分布到不同的机器上。怎么分布呢？最早，肯定只有一台机器有一个原始版本库，此后，别的机器可以“克隆”这个原始版本库，而且每台机器的版本库其实都是一样的，并没有主次之分。</li>
+						</ul>
+					</section>
+					<section>
+						<div id="github_name">
+							github
+						</div>
+						<h2>一个神奇的网站:<del>gayhub</del></h2>
+						<ul>
+							<li>从名字就可以看出，这个网站就是提供Git仓库托管服务的，所以，只要注册一个GitHub账号，就可以免费获得Git远程仓库。</li>
+						</ul>
+							
+					</section>
+					<section>
+						<h2>使用SSH连接至github</h2>
+						<pre><code class="linux" data-trim style="font-size: 18px;">
+							$ ssh-keygen -t rsa -C "youremail@example.com"
+						</code></pre>	
+						<ul>
+							<li>在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有id_rsa和id_rsa.pub这两个文件</li>
+							<li>这两个就是SSH Key的秘钥对，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人</li>
+							<li>最后把公钥放到github配置里</li>
+						</ul>
+					</section>
+					<section>
+						<h2>将本地代码添加至远程库</h2>
+						<ul>
+							<li>登陆GitHub，找到“Create a new repo”按钮，创建一个新的仓库</li>
+							<li>git push把本地库的所有内容推送到远程库上</li>
+							<pre><code class="linux" data-trim style="font-size: 18px;">
+								$ git push -u origin master
+								Counting objects: 19, done.
+								Delta compression using up to 4 threads.
+								Compressing objects: 100% (19/19), done.
+								Writing objects: 100% (19/19), 13.73 KiB, done.
+								Total 23 (delta 6), reused 0 (delta 0)
+								To git@github.com:michaelliao/learngit.git
+								* [new branch]      master -> master
+								Branch master set up to track remote branch master from origin.
+							</code></pre>	
+						</ul>
+					</section>
+					<section>
+						<h2>从远程库克隆至本地</h2>
+						<ul>
+							<li>登陆GitHub，创建一个新的仓库</li>
+							<li>用命令git clone克隆一个本地库</li>
+						</ul>
+						<pre><code class="linux" data-trim style="font-size: 18px;">
+								$ git clone git@github.com:michaelliao/gitskills.git
+								Cloning into 'gitskills'...
+								remote: Counting objects: 3, done.
+								remote: Total 3 (delta 0), reused 0 (delta 0)
+								Receiving objects: 100% (3/3), done.
+							</code></pre>	
+					</section>
+					<section>
+						<h2>一些教程</h2>
+						<ul>
+							<li><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">廖雪峰的Git教程</a></li>
+							<li><a href="https://help.github.com/">github官方文档</a></li>
+						</ul>
+					</section>
+				</section>
+
+
+				
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				mouseWheel: true,
+
+				transition: 'zoom', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
+
+
